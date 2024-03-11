@@ -61,6 +61,10 @@
         background-color: #111;
     }
 
+    .list-group-item.checked span {
+    text-decoration: line-through;
+    }
+
     .task-buttons {
         position: absolute;
         top: 50%;
@@ -151,28 +155,27 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Fetch tasks from localStorage when the page loads
+    
     var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(function(task) {
         addTaskToList(task);
     });
 
-    // Function to handle adding tasks
+ 
     document.getElementById('to-do-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
         var taskInput = document.getElementById('task').value;
 
         if (taskInput.trim() !== '') {
-            addTaskToList(taskInput); // If successful, add the task to the list
-            saveTaskToLocalStorage(taskInput); // Save task to localStorage
+            addTaskToList(taskInput); 
+            saveTaskToLocalStorage(taskInput); 
             document.getElementById('task').value = '';
         } else {
             alert('Please enter a task.');
         }
     });
 
-    // Function to add a task to the list
     function addTaskToList(taskInput) {
         var listItem = document.createElement('li');
         listItem.className = 'list-group-item';
@@ -187,14 +190,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('task-list').appendChild(listItem);
     }
 
-    // Function to save task to localStorage
+    
     function saveTaskToLocalStorage(task) {
         var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         tasks.push(task);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
-    // Function to handle deleting tasks
+   
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('delete-button')) {
             var listItem = event.target.closest('.list-group-item');
@@ -204,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Function to handle editing tasks
+   
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('edit-button')) {
             var listItem = event.target.closest('.list-group-item');
@@ -217,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Function to remove task from localStorage
+    
     function removeTaskFromLocalStorage(task) {
         var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         var index = tasks.indexOf(task);
@@ -227,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to update task in localStorage
     function updateTaskInLocalStorage(oldTask, newTask) {
         var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         var index = tasks.indexOf(oldTask);
@@ -237,6 +239,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+    document.addEventListener('change', function(event) {
+         if (event.target.type === 'checkbox') {
+         var listItem = event.target.closest('.list-group-item');
+             listItem.classList.toggle('checked');
+    }
+});
+
 </script>
 
 </body>
