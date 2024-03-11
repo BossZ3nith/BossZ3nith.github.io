@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-6Dckd/6gBwsiWVXwSzJlmYlPkT7Ww09V6z/5j73VUB7q5OW67OoapZj3V5J+K4DdUZ0cS1TbGb6t7YeLxob2rA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+       body {
+        background-color: yellow;
+        color: #FFD700;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .to-do-container {
+        max-width: 800px; 
+        margin: 50px auto; 
+        padding: 50px; 
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        background-color: black;
+    }
+
+    .form-control {
+        border: none;
+        border-radius: 20px;
+        background-color: #222;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        color: #fff;
+    }
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .btn-primary {
+        background-color: #FFD700;
+        color: #000;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #DAA520;
+    }
+
+    .list-group-item {
+        background-color: #222;
+        color: #FFD700;
+        border: none;
+        position: relative;
+        padding: 10px 60px 10px 20px; 
+    }
+
+    .list-group-item:hover {
+        background-color: #111;
+    }
+
+    .task-buttons {
+        position: absolute;
+        top: 50%;
+        right: 10px; 
+        transform: translateY(-50%);
+    }
+
+    .delete-button, .edit-button {
+        margin-right: 5px;
+        padding: 5px 10px;
+        color: black;
+    }
+
+    .delete-button:hover, .edit-button:hover {
+        background-color: #FFD700;
+        color: #000;
+    }
+
+    .navbar {
+        background-color: #ffd700;
+        padding: 10px 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .navbar ul li {
+        margin-right: 20px; 
+        transition: transform 0.2s;
+    }
+
+    .navbar ul li:last-child {
+        margin-right: 0;
+    }
+
+    .navbar ul li a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+    }
+
+    .navbar ul li a:hover,
+    .navbar ul li a:focus {
+        transform: scale(1.1);
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <ul>
+        <li id="home" class="active"><a href="Home.html"><img src="logo1.png" alt="Home"></a></li>
+    </ul>
+    <ul>
+        <li><a href="Tips.html">Tips</a></li>
+        <li><a href="About.html">About Us</a></li>
+        
+    </ul>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2"> 
+      <div class="to-do-container">
+        <h2 class="text-center">Take Notes</h2>
+        <form id="to-do-form">
+          <div class="form-group">
+            <label for="task">Task</label>
+            <input type="text" class="form-control" id="task" placeholder="Enter task">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Task</button>
+        </form>
+        <ul class="list-group mt-3" id="task-list">
+          <!-- Tasks will be added here dynamically -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch tasks from localStorage when the page loads
+    var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(function(task) {
+        addTaskToList(task);
+    });
+
+    // Function to handle adding tasks
+    document.getElementById('to-do-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var taskInput = document.getElementById('task').value;
+
+        if (taskInput.trim() !== '') {
+            addTaskToList(taskInput); // If successful, add the task to the list
+            saveTaskToLocalStorage(taskInput); // Save task to localStorage
+            document.getElementById('task').value = '';
+        } else {
+            alert('Please enter a task.');
+        }
+    });
+
+    // Function to add a task to the list
+    function addTaskToList(taskInput) {
+        var listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+        listItem.innerHTML = `
+            <input type="checkbox" class="form-check-input me-2">
+            <span>${taskInput}</span>
+            <div class="task-buttons">
+                <button class="btn btn-sm btn-primary edit-button"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger delete-button"><i class="fas fa-times"></i></button>
+            </div>
+        `;
+        document.getElementById('task-list').appendChild(listItem);
+    }
+
+    // Function to save task to localStorage
+    function saveTaskToLocalStorage(task) {
+        var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push(task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Function to handle deleting tasks
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-button')) {
+            var listItem = event.target.closest('.list-group-item');
+            var taskText = listItem.querySelector('span').textContent;
+            removeTaskFromLocalStorage(taskText);
+            listItem.remove();
+        }
+    });
+
+    // Function to handle editing tasks
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('edit-button')) {
+            var listItem = event.target.closest('.list-group-item');
+            var taskText = listItem.querySelector('span').textContent;
+            var newTaskText = prompt('Edit Task', taskText);
+            if (newTaskText !== null && newTaskText.trim() !== '') {
+                listItem.querySelector('span').textContent = newTaskText;
+                updateTaskInLocalStorage(taskText, newTaskText);
+            }
+        }
+    });
+
+    // Function to remove task from localStorage
+    function removeTaskFromLocalStorage(task) {
+        var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        var index = tasks.indexOf(task);
+        if (index !== -1) {
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }
+
+    // Function to update task in localStorage
+    function updateTaskInLocalStorage(oldTask, newTask) {
+        var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        var index = tasks.indexOf(oldTask);
+        if (index !== -1) {
+            tasks[index] = newTask;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }
+});
+</script>
+
+</body>
+</html>
