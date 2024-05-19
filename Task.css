@@ -15,8 +15,11 @@ body {
     padding: 50px; 
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    background-color: #faf4e4;
-    color: #D3a121;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #808080;
+}
+.text-center{
+    color: black;
 }
 
 .form-control {
@@ -28,11 +31,11 @@ body {
 }
 .form-control:focus {
     outline: none;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
 }
 
 .btn-primary {
-    background-color: goldenrod;
+    background-color:#3DAC78;
     color: #faf4e4;
     border: none;
     border-radius: 20px;
@@ -42,11 +45,12 @@ body {
 
 .btn-primary:hover {
     background-color: black;
+    
 }
 
 .list-group-item {
-    background-color: white;
-    color: #D3a121;
+    background-color:  rgba(255, 255, 255, 0.5);
+    color: grey;
     border: none;
     position: relative;
     padding: 10px 60px 10px 20px; 
@@ -74,7 +78,12 @@ text-decoration: line-through;
 }
 
 .delete-button:hover, .edit-button:hover {
-    background-color: #FFD700;
+    background-color: red;
+    color: black;
+}
+
+ .edit-button:hover {
+    background-color: green ;
     color: black;
 }
 
