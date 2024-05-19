@@ -125,15 +125,15 @@ function updateChart() {
             datasets: [{
                 label: 'Savings',
                 data: Object.values(savings),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(0, 128, 0, 1)',
+                borderColor: 'rgba(0, 128, 0, 1)',
                 borderWidth: 1
             },
             {
                 label: 'Expenses',
                 data: Object.values(expenses).map(day => day ? Object.values(day).reduce((acc, cur) => acc + cur, 0) : 0),
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(218, 165, 32, 1)',
+                borderColor: 'rgba(218, 165, 32, 1)',
                 borderWidth: 1
             }]
         },
@@ -165,14 +165,14 @@ function updateExpenseChart() {
                     Object.values(expenses).reduce((acc, day) => acc + (day && day.academic ? day.academic : 0), 0)
                 ],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(0, 102, 0, 1)',
+                    'rgba(0, 158, 96, 1)',
+                    'rgba(11, 218, 81, 1)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(0, 102, 0, 1)',
+                    'rgba(0, 158, 96, 1)',
+                    'rgba(11, 218, 81, 1)'
                 ],
                 borderWidth: 1
             }]
