@@ -55,8 +55,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center; 
-    margin: 50px;
-    background-color: #FAf4e4;
+    margin-top: 50px; 
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -74,7 +77,7 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #d3a121; 
+    background-color: #3DAC78; 
     color:  #faf4e4;  
     font-size: 16px;
 }
@@ -89,6 +92,7 @@ button:hover {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color:  rgba(255, 255, 255, 0.5);
 }
 
 #savings-menu input,
@@ -106,7 +110,7 @@ button:hover {
 #savings-menu input:focus,
 #expenses-menu input:focus {
     outline: none; 
-    border-color: goldenrod; 
+    border-color: rgba(6, 219, 102, 0.856); 
     box-shadow: 0 0 5px black;
 }
 
@@ -116,7 +120,7 @@ button:hover {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #d3a121; 
+    background-color: #3DAC78; 
     font-size: 16px;
 }
 
@@ -145,7 +149,7 @@ button:hover {
 }
 
 .expenses-notification {
-    background-color: #FF5733; 
+    background-color: goldenrod; 
     color: white;
 }
 
@@ -172,6 +176,8 @@ button:hover {
     overflow-y: auto;
     max-height: 200px; 
     display: none; 
+    background-color: rgba(255, 255, 255, 0.5) ;
+    color: grey;
 }
 
 #close-history {
@@ -258,18 +264,18 @@ button:hover {
 
 #expenses-menu select:focus {
     outline: none; 
-    border-color: #66afe9; 
-    box-shadow: 0 0 5px #66afe9; 
+    border-color: none; 
+    box-shadow: 0 0 5px rgba(6, 219, 102, 0.856); 
 }
 
 #expenses-menu select option[value="food"] {
-    background-color: #ffcccb; 
+    background-color: rgba(0, 102, 0, 1); 
 }
 
 #expenses-menu select option[value="transportation"] {
-    background-color: #add8e6;
+    background-color: rgba(0, 158, 96, 1);
 }
 
 #expenses-menu select option[value="academic"] {
-    background-color: #90ee90; 
+    background-color: rgba(11, 218, 81, 1); 
 }
